@@ -1,22 +1,41 @@
-import React from "react";
+import React, { Component } from "react";
 import { StyleSheet, View, TextInput, Button } from "react-native";
 
-function InputAndButton(props) {
-  return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.placeInput}
-        placeholder="Pepe"
-        value={props.placeName}
-        onChangeText={props.placeNameChangedHandler}
-      />
-      <Button
-        style={styles.placeButton}
-        title="Add"
-        onPress={props.placeSubmitHandler}
-      />
-    </View>
-  );
+class InputAndButton extends Component {
+  state = {
+    placeName: ""
+  };
+
+  placeNameChangedHandler = value => {
+    this.setState({
+      placeName: value
+    });
+  };
+
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === "") {
+      return;
+    }
+    this.props.onPlaceAdded(this.state.placeName);
+  };
+
+  render() {
+    return (
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.placeInput}
+          placeholder="Pepe"
+          value={this.state.placeName}
+          onChangeText={this.placeNameChangedHandler}
+        />
+        <Button
+          style={styles.placeButton}
+          title="Add"
+          onPress={this.placeSubmitHandler}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
+import { Modal, View, Image, Text, Button, StyleSheet, Platform } from "react-native";
 
 function PlaceDetail(props) {
   let modalContent = null;
